@@ -14,7 +14,7 @@ public class Main {
             command = getCommand(splitCommand);
             switch (command) {
                 case "start":
-                    addNewTimer(timerName);
+                    startTimer(timerName);
                     break;
                 case "stop":
                     stopTimer(timerName);
@@ -31,12 +31,37 @@ public class Main {
         } while (!command.equals("exit"));
     }
 
-    private static String getTimerName(String[] splitCommand){
+    private static String[] getUserInput() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Command?");
+        return sc.nextLine().split(" ");
+    }
+
+    private static String getTimerName(String[] splitCommand) {
         return splitCommand.length > 1 ? splitCommand[1] : "";
     }
 
-    private static String getCommand(String[] splitCommand){
+    private static String getCommand(String[] splitCommand) {
         return splitCommand[0];
+    }
+
+    private static void startTimer(String timerName) {
+        if (!timers.containsKey(timerName)) addNewTimer(timerName);
+        else restartTimer(timerName);
+    }
+
+    private static void restartTimer(String timerName) {
+        Timer stoppedTimer = timers.get(timerName);
+        timers.remove(timerName);
+        Timer restartedTimer = new Timer(timerName, stoppedTimer.getCounter());
+        timers.put(timerName, restartedTimer);
+        restartedTimer.start();
+    }
+
+    private static void addNewTimer(String timerName) {
+        Timer timer = new Timer(timerName);
+        timer.start();
+        timers.put(timerName, timer);
     }
 
     private static void checkTimer(String timerName) {
@@ -54,19 +79,6 @@ public class Main {
         printTimer(timerToStop);
         timerToStop.interrupt();
     }
-
-    private static void addNewTimer(String timerName) {
-        Timer timer = new Timer(timerName);
-        timer.start();
-        timers.put(timerName, timer);
-    }
-
-    private static String[] getUserInput() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Command?");
-        return sc.nextLine().split(" ");
-    }
-
 
     private static void printTimer(Timer timer) {
         System.out.println("Name: " + timer.getName()
