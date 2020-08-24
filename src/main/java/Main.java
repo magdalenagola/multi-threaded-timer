@@ -53,7 +53,6 @@ public class Main {
         Timer timerToStop = timers.get(timerName);
         printTimer(timerToStop);
         timerToStop.interrupt();
-        timers.remove(timerName);
     }
 
     private static void addNewTimer(String timerName) {
