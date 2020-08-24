@@ -7,6 +7,11 @@ public class Timer extends Thread {
         super(name);
     }
 
+    Timer(String name, int counter){
+        super(name);
+        this.counter = counter;
+    }
+
     @Override
     public void run() {
         while (!Thread.interrupted()){
