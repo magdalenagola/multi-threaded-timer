@@ -18,6 +18,7 @@ public class Timer extends Thread {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
+                System.out.printf("%s received interrupt while sleeping\n", super.getName());
                 return;
             }
             counter++;
