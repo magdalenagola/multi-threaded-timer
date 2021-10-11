@@ -1,5 +1,5 @@
 # multi-threaded-timer
-A Java console application with which you can start multiple timers. Timers run independently of each other and measure time in seconds (not super precisely).
+A Java console application for learning purposes that allows users to start multiple timers. Timers run independently of each other and measure time in seconds (not super precisely).
 
 
 Users can:
